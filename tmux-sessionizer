@@ -1,9 +1,17 @@
 #!/usr/bin/env bash
 
+# Load parent directories from directories.conf
+parent_dirs=$(eval echo $(xargs < ~/.config/tmux/directories.conf))
+
+# Load single directories from single_directories.conf
+single_dirs=$(eval echo $(xargs < ~/.config/tmux/single_directories.conf))
+
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    selected=$(find $(eval echo $(xargs <  ~/.config/tmux/directories.conf )) -mindepth 1 -maxdepth 1 -type d | fzf)
+    parent_dir_results=$(find $parent_dirs -mindepth 1 -maxdepth 1 -type d 2>/dev/null)
+    single_dir_results=$(find $single_dirs -mindepth 0 -maxdepth 0 -type d 2>/dev/null)
+    selected=$(printf "%s\n%s" "$parent_dir_results" "$single_dir_results" | fzf)
 fi
 
 if [[ -z $selected ]]; then

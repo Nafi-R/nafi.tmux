@@ -1,32 +1,41 @@
 * HOW TO INSTALL
 
 
+1. Install the required dependencies:
+    ```bash
+    sudo apt install tmux fzf
+
 1. Clone the repository:
     ```bash
     git clone https://github.com/Nafi-R/nafi.tmux.git ~/.config/tmux
     ```
 
-2. Source the configuration:
+1. Source the configuration:
     ```bash
     tmux source-file ~/.config/tmux/tmux.conf
     ```
-3. Restart tmux:
+1. Restart tmux:
     ```bash
     tmux kill-server
     ```
-4. Add tmux-sessionizer to your PATH and add CTRL+F to start tmux-sessionizer:
+
+1. Add the following line to your `~/.bashrc`:
     ```bash
-    echo 'export PATH="$PATH:$HOME/.config/tmux/tmux-sessionizer"' >> ~/.bashrc
-    echo 'bind '"\C-f":"tmux-sessionizer\n"'' >> ~/.bashrc 
-    source ~/.bashrc
+    PATH="$PATH:"$HOME/.config/tmux/tmux-sessionizer"
+    bind "\C-f":"tmux-sessionizer\n"
     ```
 
-5. Give execute permission to the tmux-sessionizer script:
+1. Update your directories in `~/.config/tmux/directories.conf` and `~/.confing/tmux/single-directory.conf`:
+    ```bash
+    # Example directories.conf
+    # Add your directories here
+    ~/projects
+    ~/documents
+    ~/downloads
+    ```
+
+1. Give execute permission to the tmux-sessionizer script:
     ```bash
     chmod +x ~/.config/tmux/tmux-sessionizer
-    ```
-6. Install the required dependencies:
-    ```bash
-    sudo apt install fzf ripgrep fd bat exa
     ```
 
